@@ -16,18 +16,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.9' # 안정적인 Python 버전으로 변경
+        python-version: '3.9' # 안정적인 Python 버전으로 고정
 
     - name: Install Buildozer and Kivy dependencies
       run: |
-        pip install buildozer kivy setuptools cython # cython 추가
+        pip install buildozer kivy setuptools cython # 필요한 라이브러리 설치
         sudo apt-get update
         sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 
-    - name: Build Android APK
+    - name: Clean Buildozer environment and Build Android APK
       run: |
         rm -rf .buildozer # .buildozer 디렉토리 삭제하여 빌드 환경 초기화
-        buildozer android update # Android SDK 및 NDK 업데이트/설치
+        buildozer android clean # buildozer 내부 캐시 정리
         buildozer android debug # APK 빌드 명령
 
     - name: Upload APK artifact
