@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x' # 사용할 Python 버전
+        python-version: '3.9' # 안정적인 Python 버전으로 변경
 
     - name: Install Buildozer and Kivy dependencies
       run: |
