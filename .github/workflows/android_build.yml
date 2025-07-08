@@ -1,0 +1,35 @@
+name: Android APK Build
+
+on:
+  push:
+    branches:
+      - main # main 브랜치에 push될 때마다 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Linux 환경에서 실행
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # 사용할 Python 버전
+
+    - name: Install Buildozer and Kivy dependencies
+      run: |
+        pip install buildozer kivy # 필요한 라이브러리 설치
+        sudo apt-get update
+        sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+    - name: Build Android APK
+      run: |
+        buildozer android debug # APK 빌드 명령
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apk
+        path: bin/*.apk # 빌드된 APK 파일 경로

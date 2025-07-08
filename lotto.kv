@@ -1,0 +1,249 @@
+#:kivy 2.1.0
+
+<LottoBall>:
+    size_hint: None, None
+    size: '45dp', '45dp'
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.2
+        Ellipse:
+            size: self.size[0] - 2, self.size[1] - 2
+            pos: self.pos[0] + 1, self.pos[1] - 1
+        Color:
+            rgba: root.ball_color
+        Ellipse:
+            size: self.size
+            pos: self.pos
+        Color:
+            rgba: 1, 1, 1, 0.4
+        Ellipse:
+            size: self.size[0] * 0.3, self.size[1] * 0.3
+            pos: self.pos[0] + self.size[0] * 0.15, self.pos[1] + self.size[1] * 0.35
+
+    Label:
+        text: str(root.number)
+        center: root.center
+        font_size: '16sp'
+        bold: True
+        color: 1, 1, 1, 1
+
+<Card@BoxLayout>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: '12dp'
+    spacing: '8dp'
+    canvas.before:
+        Color:
+            rgba: 0.95, 0.95, 0.95, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [8]
+        Color:
+            rgba: 0, 0, 0, 0.1
+        RoundedRectangle:
+            pos: self.pos[0] + 2, self.pos[1] - 2
+            size: self.size
+            radius: [8]
+
+<ActionButton@Button>:
+    size_hint_y: None
+    height: '48dp'
+    font_size: '16sp'
+    bold: True
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [8]
+
+<LottoGeneratorLayout>:
+    orientation: 'vertical'
+    padding: '8dp'
+    spacing: '8dp'
+
+    canvas.before:
+        Color:
+            rgba: 0.12, 0.12, 0.20, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # 헤더
+    BoxLayout:
+        size_hint_y: None
+        height: '60dp'
+        padding: '8dp'
+        canvas.before:
+            Color:
+                rgba: 0.2, 0.2, 0.32, 1
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [12]
+        Label:
+            text: "🟡🔴🔵 6/45 로또 생성기"
+            font_size: '22sp'
+            bold: True
+            color: 1, 1, 1, 1
+
+    # 상태 표시
+    BoxLayout:
+        size_hint_y: None
+        height: '36dp'
+        padding: '4dp'
+        Label:
+            id: db_status_label
+            text: "데이터 로딩 중..."
+            font_size: '14sp'
+            color: 0.8, 0.8, 0.9, 1
+            text_size: self.size
+            halign: 'center'
+
+    # 컨트롤 카드
+    Card:
+        GridLayout:
+            cols: 2
+            spacing: '8dp'
+            row_default_height: '44dp'
+            size_hint_y: None
+            height: self.minimum_height
+
+            Label:
+                text: "전략"
+                font_size: '14sp'
+                color: 0.2, 0.2, 0.2, 1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+            
+            Spinner:
+                id: method_spinner
+                text: "1. 기본 랜덤"
+                font_size: '14sp'
+                background_color: 0.3, 0.3, 0.45, 1
+                color: 1, 1, 1, 1
+
+            Label:
+                text: "게임수"
+                font_size: '14sp'
+                color: 0.2, 0.2, 0.2, 1
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+            
+            TextInput:
+                id: games_input
+                text: "5"
+                font_size: '14sp'
+                multiline: False
+                input_filter: 'int'
+                background_color: 0.3, 0.3, 0.45, 1
+                foreground_color: 1, 1, 1, 1
+                halign: 'center'
+
+    # 액션 버튼
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: '8dp'
+        size_hint_y: None
+        height: '48dp'
+        
+        ActionButton:
+            text: "🗑️ 초기화"
+            on_press: root.clear_results()
+            background_color: 0.9, 0.3, 0.3, 1
+            color: 1, 1, 1, 1
+            size_hint_x: 0.25
+        
+        ActionButton:
+            text: "🎯 로또번호 생성"
+            on_press: root.generate_numbers()
+            background_color: 0.2, 0.8, 0.4, 1
+            color: 1, 1, 1, 1
+            size_hint_x: 0.75
+
+    # 조회 섹션
+    Card:
+        GridLayout:
+            cols: 4
+            spacing: '4dp'
+            row_default_height: '44dp'
+            size_hint_y: None
+            height: self.minimum_height
+
+            Label:
+                text: "회차(부터~까지)"
+                font_size: '11sp'
+                color: 0.2, 0.2, 0.2, 1
+                size_hint_x: 0.15
+            
+            TextInput:
+                id: from_round_input
+                text: "..."
+                font_size: '13sp'
+                multiline: False
+                input_filter: 'int'
+                size_hint_x: 0.25
+            
+            TextInput:
+                id: to_round_input
+                text: "..."
+                font_size: '13sp'
+                multiline: False
+                input_filter: 'int'
+                size_hint_x: 0.25
+            
+            ActionButton:
+                text: "🔍 당첨된 번호 조회"
+                size_hint_x: 0.35
+                on_press: root.query_winning_numbers()
+                background_color: 0.4, 0.4, 0.6, 1
+
+    # 메인 화면
+    ScreenManager:
+        id: screen_manager
+        Screen:
+            name: 'animation_screen'
+            LottoAnimationWidget:
+                id: animation_widget
+        Screen:
+            name: 'results_screen'
+            ScrollView:
+                do_scroll_x: False
+                GridLayout:
+                    id: results_layout
+                    cols: 1
+                    spacing: '6dp'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: '4dp'
+
+<QueryResultsPopup@Popup>:
+    title: "당첨번호 조회"
+    size_hint: 0.95, 0.85
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '8dp'
+        spacing: '8dp'
+
+        ScrollView:
+            do_scroll_x: False
+            GridLayout:
+                id: query_results_layout
+                cols: 1
+                spacing: '6dp'
+                size_hint_y: None
+                height: self.minimum_height
+
+        ActionButton:
+            text: "닫기"
+            size_hint_y: None
+            height: '48dp'
+            on_press: root.dismiss()
+            background_color: 0.6, 0.6, 0.6, 1
