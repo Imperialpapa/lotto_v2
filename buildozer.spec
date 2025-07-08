@@ -101,42 +101,23 @@ fullscreen = 0
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 35
 
 # (int) Minimum API your APK / AAB will support.
-#android.minapi = 21
-
-# (int) Android SDK version to use
-#android.sdk = 20
+android.minapi = 21
 
 # (str) Android NDK version to use
-#android.ndk = 23b
-
-# (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
-#android.ndk_api = 21
-
-# (bool) Use --private data storage (True) or --dir public storage (False)
-#android.private_storage = True
-
-# (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
-
-# (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
-
-# (str) ANT directory (if empty, it will be automatically downloaded.)
-#android.ant_path =
-
-# (bool) If True, then skip trying to update the Android sdk
-# This can be useful to avoid excess Internet downloads or save time
-# when an update is due and you just want to test/build your package
-# android.skip_update = False
+# Android API 35에 맞는 NDK 버전을 사용합니다.
+# buildozer는 일반적으로 최신 NDK를 자동으로 선택하지만,
+# 명시적으로 지정하는 경우 호환되는 버전을 사용해야 합니다.
+# 여기서는 buildozer가 자동으로 최신 호환 NDK를 선택하도록 주석 처리하겠습니다.
+# android.ndk = 26b (예시)
 
 # (bool) If True, then automatically accept SDK license
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
 # buildozer.
-# android.accept_sdk_license = False
+android.accept_sdk_license = True
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.kivy.android.PythonActivity
