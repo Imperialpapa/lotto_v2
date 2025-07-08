@@ -3,7 +3,7 @@ name: Android APK Build
 on:
   push:
     branches:
-      - main # main 브랜치에 push될 때마다 실행
+      - master # master 브랜치에 push될 때마다 실행
 
 jobs:
   build:
