@@ -24,6 +24,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 
+    - name: Clone python-for-android
+      run: |
+        mkdir -p .buildozer/android/platform
+        git clone https://github.com/kivy/python-for-android.git .buildozer/android/platform/python-for-android
+        cd .buildozer/android/platform/python-for-android
+        git checkout develop # p4a.branch와 동일하게 develop 브랜치 사용
+
     - name: Clean Buildozer environment and Build Android APK
       run: |
         rm -rf .buildozer # .buildozer 디렉토리 삭제하여 빌드 환경 초기화

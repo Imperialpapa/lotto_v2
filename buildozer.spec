@@ -10,7 +10,7 @@ package.name = lottogenerator
 package.domain = org.kivy.lotto
 
 # (str) Source code where the main.py live
-source.dir = .
+p4a.source_dir = /home/runner/work/lotto_v2/lotto_v2/.buildozer/android/platform/python-for-android
 
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas,json,csv
