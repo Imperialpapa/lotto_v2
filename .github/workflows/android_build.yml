@@ -26,6 +26,7 @@ jobs:
 
     - name: Build Android APK
       run: |
+        rm -rf .buildozer # .buildozer 디렉토리 삭제하여 빌드 환경 초기화
         buildozer android update # Android SDK 및 NDK 업데이트/설치
         buildozer android debug # APK 빌드 명령
 
