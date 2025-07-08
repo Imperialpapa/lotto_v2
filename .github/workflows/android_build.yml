@@ -26,6 +26,7 @@ jobs:
 
     - name: Build Android APK
       run: |
+        buildozer android update # Android SDK 및 NDK 업데이트/설치
         buildozer android debug # APK 빌드 명령
 
     - name: Upload APK artifact
