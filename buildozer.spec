@@ -106,6 +106,9 @@ android.api = 35
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
 
+# (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
+android.ndk_api = 35
+
 # (str) Android NDK version to use
 # Android API 35에 맞는 NDK 버전을 사용합니다.
 # buildozer는 일반적으로 최신 NDK를 자동으로 선택하지만,
