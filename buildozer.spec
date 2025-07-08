@@ -101,20 +101,16 @@ fullscreen = 0
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 35
+android.api = 33
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
-android.ndk_api = 35
+android.ndk_api = 33
 
 # (str) Android NDK version to use
-# Android API 35에 맞는 NDK 버전을 사용합니다.
-# buildozer는 일반적으로 최신 NDK를 자동으로 선택하지만,
-# 명시적으로 지정하는 경우 호환되는 버전을 사용해야 합니다.
-# 여기서는 buildozer가 자동으로 최신 호환 NDK를 선택하도록 주석 처리하겠습니다.
-# android.ndk = 26b (예시)
+android.ndk = 25b
 
 # (bool) If True, then automatically accept SDK license
 # agreements. This is intended for automation only. If set to False,
