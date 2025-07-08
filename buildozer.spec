@@ -58,7 +58,7 @@ p4a.url = https://github.com/kivy/python-for-android
 p4a.branch = develop
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
-p4a.source_dir = /home/runner/work/lotto_v2/lotto_v2/.buildozer/android/platform/python-for-android
+#p4a.source_dir =
 
 [buildozer]
 
